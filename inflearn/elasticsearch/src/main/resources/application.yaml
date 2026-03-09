@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: elasticsearch
+
+  elasticsearch:
+    uris: http://localhost:9200
+
+logging:
+  level:
+    co.elastic.clients: TRACE
