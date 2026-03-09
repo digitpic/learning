@@ -11,11 +11,21 @@ class UserDocument(
     val id: String? = null,
 
     @Field(type = FieldType.Text)
-    val name: String,
+    var name: String,
 
     @Field(type = FieldType.Long)
-    val age: Long,
+    var age: Long,
 
     @Field(type = FieldType.Boolean)
-    val isActive: Boolean,
-)
+    var isActive: Boolean,
+) {
+    fun update(
+        name: String,
+        age: Long,
+        isActive: Boolean,
+    ) {
+        this.name = name
+        this.age = age
+        this.isActive = isActive
+    }
+}
