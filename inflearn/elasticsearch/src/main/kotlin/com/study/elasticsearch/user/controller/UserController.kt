@@ -3,6 +3,8 @@ package com.study.elasticsearch.user.controller
 import com.study.elasticsearch.user.document.UserDocument
 import com.study.elasticsearch.user.dto.CreateUserRequest
 import com.study.elasticsearch.user.service.UserService
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -20,4 +22,10 @@ class UserController(
         age = request.age,
         isActive = request.isActive,
     )
+
+    @GetMapping
+    fun getAll() : List<UserDocument> = service.getAll()
+
+    @GetMapping("/{id}")
+    fun getById(@PathVariable id: String) = service.getById(id)
 }

@@ -3,6 +3,7 @@ package com.study.elasticsearch.user.service
 import com.study.elasticsearch.user.document.UserDocument
 import com.study.elasticsearch.user.repository.UserDocumentRepository
 import org.springframework.stereotype.Service
+import kotlin.jvm.optionals.getOrNull
 
 @Service
 class UserService(
@@ -22,4 +23,9 @@ class UserService(
         )
         return repository.save(document)
     }
+
+    fun getAll(): List<UserDocument> = repository.findAll().toList()
+
+    fun getById(id: String): UserDocument = repository.findById(id).getOrNull()
+        ?: throw NoSuchElementException("User with id $id not found")
 }
