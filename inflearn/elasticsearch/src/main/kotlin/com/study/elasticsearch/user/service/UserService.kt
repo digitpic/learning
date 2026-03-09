@@ -1,6 +1,5 @@
 package com.study.elasticsearch.user.service
 
-import co.elastic.clients.elasticsearch._types.query_dsl.LikeBuilders.document
 import com.study.elasticsearch.user.document.UserDocument
 import com.study.elasticsearch.user.repository.UserDocumentRepository
 import org.springframework.stereotype.Service
@@ -16,13 +15,13 @@ class UserService(
         age: Long,
         isActive: Boolean,
     ): UserDocument {
-        val document = UserDocument(
+        val user = UserDocument(
             id = id,
             name = name,
             age = age,
             isActive = isActive,
         )
-        return repository.save(document)
+        return repository.save(user)
     }
 
     fun getAll(): List<UserDocument> = repository.findAll().toList()
@@ -38,12 +37,19 @@ class UserService(
         age: Long,
         isActive: Boolean,
     ): UserDocument {
-        val document = getById(id)
-        document.update(
+        val user = getById(id)
+        user.update(
             name = name,
             age = age,
             isActive = isActive,
         )
-        return repository.save(document)
+        return repository.save(user)
+    }
+
+    fun deleteById(
+        id: String,
+    ) {
+        val user = getById(id)
+        repository.delete(user)
     }
 }
